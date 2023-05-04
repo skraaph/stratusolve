@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script_btn_fibonacci.js"></script>
+    <title>Fibonacci Sequence</title>
+</head>
+<body>
+    <h1>Fibonacci Sequence</h1>
+    <form method="post" onsubmit="getFibonacci(event)">
+        <label for="max">Maximum number:</label>
+        <input type="number" id="max" name="max">
+        <button type="submit">Generate</button>
+    </form>
+    <div>
+        <label for="result">Output:</label>
+        <div id="result"></div>
+    </div>
+</body>
+</html>

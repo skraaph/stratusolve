@@ -5,6 +5,14 @@
 // 1. Implement the solution as a loop
 // 2. Implement the solution using a recursive function
 
+// Task 5:
+
+// Modify your Foundation Task 2 (https://trello.com/c/rXQogHiZ) result to do the following:
+
+// Your php script should accept a POST variable that will serve as the maximum number for the Fibonacci sequence.
+// Create a new html file that will have an input box where the user can specify the maximum number for the Fibonacci sequence.
+// Add a button to the html file that will, when clicked take the user input and post it (using javascript) to the php script and then output the result on the screen
+
 Define("MAX_FIBONACCI_INT", 34);
 
 function printFibonacciLoop($MaxInt) {
@@ -58,14 +66,11 @@ function printFibonacciGenerator($MaxInt) {
     }
 }
 
-printFibonacciLoop(MAX_FIBONACCI_INT);
-echo '</br>';
-printFibonacciRecursive(MAX_FIBONACCI_INT);
-echo '</br>';
-printFibonacciGenerator(MAX_FIBONACCI_INT);
-
-// Output:
-// 0 1 1 2 3 5 8 13 21 34
-// 0 1 1 2 3 5 8 13 21 34
-// 0 1 1 2 3 5 8 13 21 34
+// printFibonacciLoop(MAX_FIBONACCI_INT);
+// echo '</br>';
+// printFibonacciRecursive(MAX_FIBONACCI_INT);
+// echo '</br>';
+// printFibonacciGenerator(MAX_FIBONACCI_INT);
 ?>
+
+<?php include('index.html'); ?>
