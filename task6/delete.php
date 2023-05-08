@@ -2,6 +2,8 @@
 
 include 'core/init.php';
 
+$PersonDataArr = array();
+
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'deleteId') {
         $PersonDataArr = [

@@ -1,34 +1,34 @@
 <?php 
 
 class Logger {
-    private $startTime;
-    private $endTime;
-    private $logFile;
+    private $StartTime;
+    private $EndTime;
+    private $LogFile;
     
-    public function __construct($logFile) {
-        $this->logFile = $logFile;
+    public function __construct($LogFile) {
+        $this->LogFile = $LogFile;
     }
     
     public function startLog() {
-        $this->startTime = microtime(true);
+        $this->StartTime = microtime(true);
     }
     
     public function endLog() {
-        $this->endTime = microtime(true);
+        $this->EndTime = microtime(true);
     }
 
     public function saveLog() {
-        $startLog = "Started at: " . date("Y-m-d H:i:s", $this->startTime) . "\n";
-        $endLog = "Ended at: " . date("Y-m-d H:i:s", $this->endTime) . "\n";
-        $durationLog = "Total time execute: " . round(($this->endTime - $this->startTime), 2) . " seconds.\n";
+        $StartLog = "Started at: " . date("Y-m-d H:i:s", $this->StartTime) . "\n";
+        $EndLog = "Ended at: " . date("Y-m-d H:i:s", $this->EndTime) . "\n";
+        $DurationLog = "Total time execute: " . round(($this->EndTime - $this->StartTime), 2) . " seconds.\n";
         
-        file_put_contents($this->logFile, $startLog, FILE_APPEND);
-        file_put_contents($this->logFile, $endLog, FILE_APPEND);
-        file_put_contents($this->logFile, $durationLog, FILE_APPEND);
+        file_put_contents($this->LogFile, $StartLog, FILE_APPEND);
+        file_put_contents($this->LogFile, $EndLog, FILE_APPEND);
+        file_put_contents($this->LogFile, $DurationLog, FILE_APPEND);
 
-        echo $startLog . '<br>';
-        echo $endLog . '<br>';
-        echo $durationLog . '<br>';
+        echo $StartLog . '<br>';
+        echo $EndLog . '<br>';
+        echo $DurationLog . '<br>';
     }
 }
 ?>

@@ -8,11 +8,19 @@ $(document).ready(function () {
       var dateOfBirth = $(this).find('td:eq(3)').text();
       var emailAddress = $(this).find('td:eq(4)').text();
     
-      $('#rowId').val(rowId);
-      $('#FirstName').val(firstName);
-      $('#SurName').val(surName);
-      $('#DateOfBirth').val(dateOfBirth);
-      $('#EmailAddress').val(emailAddress);
+      $('#rowIdEdit').val(rowId);
+      $('#FirstNameEdit').val(firstName);
+      $('#SurNameEdit').val(surName);
+      $('#DateOfBirthEdit').val(dateOfBirth);
+      $('#EmailAddressEdit').val(emailAddress);
+  });
+});
+
+$(document).ready(function() {
+  $('.text-only').on('input', function() {
+    $(this).val(function(_, val) {
+      return val.replace(/\d/g, '');
+    });
   });
 });
 
@@ -30,7 +38,7 @@ $(document).ready(function () {
         },
         cache: false,
         success: function(data) {
-          window.location.href=window.location.href
+          window.location.href='./'
         },
         error: function(xhr, status, error) {
           console.error(xhr);
@@ -44,25 +52,25 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $("#edit").click(function() {
-    var rowId = $("#rowId").val();
-    var FirstName = $("#FirstName").val();
-    var SurName = $("#SurName").val();
-    var DateOfBirth = $("#DateOfBirth").val();
-    var EmailAddress = $("#EmailAddress").val();
+    var rowId = $("#rowIdEdit").val();
+    var firstName = $("#FirstNameEdit").val();
+    var surName = $("#SurNameEdit").val();
+    var dateOfBirth = $("#DateOfBirthEdit").val();
+    var emailAddress = $("#EmailAddressEdit").val();
     
     $.ajax({
       url: "edit.php",
       method: "POST",
       data: {
         Id: rowId,
-        FirstName: FirstName,
-        SurName: SurName,
-        DateOfBirth: DateOfBirth,
-        EmailAddress: EmailAddress
+        FirstName: firstName,
+        SurName: surName,
+        DateOfBirth: dateOfBirth,
+        EmailAddress: emailAddress
       },
       cache: false,
       success: function(data) {
-        window.location.href=window.location.href
+        window.location.href='./'
       },
       error: function(xhr, status, error) {
         console.error(xhr);
@@ -73,12 +81,12 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $("#create").click(function() {
-    var FirstName = $("#FirstName").val();
-    var SurName = $("#SurName").val();
-    var DateOfBirth = $("#DateOfBirth").val();
-    var EmailAddress = $("#EmailAddress").val();
+    var firstName = $("#FirstName").val();
+    var surName = $("#SurName").val();
+    var dateOfBirth = $("#DateOfBirth").val();
+    var emailAddress = $("#EmailAddress").val();
     
-    if(FirstName==''||SurName==''||DateOfBirth==''||EmailAddress=='') {
+    if(firstName==''||surName==''||dateOfBirth==''||emailAddress=='') {
       alert("Please fill all fields.");
       return false;
     }
@@ -87,14 +95,14 @@ $(document).ready(function () {
       type: "POST",
       url: "create.php",
       data: {
-        FirstName: FirstName,
-        SurName: SurName,
-        DateOfBirth: DateOfBirth,
-        EmailAddress: EmailAddress
+        FirstName: firstName,
+        SurName: surName,
+        DateOfBirth: dateOfBirth,
+        EmailAddress: emailAddress
       },
       cache: false,
       success: function(data) {
-        window.location.href=window.location.href
+        window.location.href=window.location.href+data
       },
       error: function(xhr, status, error) {
         console.error(xhr);
@@ -113,7 +121,7 @@ $(document).ready(function() {
       },
       cache: false,
       success: function(data) {
-        window.location.href=window.location.href
+        window.location.href='index.php?page='+data
       },
       error: function(xhr, status, error) {
         console.error(xhr);
@@ -133,7 +141,7 @@ $(document).ready(function() {
         },
         cache: false,
         success: function(data) {
-          window.location.href=window.location.href
+          window.location.href='./'
         },
         error: function(xhr, status, error) {
           console.error(xhr);

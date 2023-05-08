@@ -22,13 +22,15 @@ a {
     gap: 2px;
 }
 
-.table_name {
+.table-name {
     flex-basis: 100%;
     position: sticky;
     top: 0;
 }
 
-.table_name h1{
+
+
+.table-name h1{
     font-weight: 600;
     font-size: 48px;
     background-color: lightgray;
@@ -73,7 +75,12 @@ a {
     background-color: rgb(220, 242, 253);
 }
 
-.menu_item {
+.nav-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-item {
     display: flex;
     position: sticky;
     top: 65px;
@@ -81,13 +88,19 @@ a {
     row-gap: 5px;
 }
 
-.menu_item input {
+.menu-item input {
     padding: 4px 4px;
     font-size: 18px;
     border-radius: 4px;
 }
 
-.fisrtname_surname {
+.fisrtname-surname {
     display: flex;
     column-gap: 4px;
+}
+
+.pagination a{
+    color: black;
+    font-family: var(--font-family);
+    font-weight: 300;
 }

@@ -25,18 +25,16 @@
 // Create an html file that allows for a user to create, read, update and delete a Person from the database
 // This file should use jquery to post data to your backend php script to perform the required functions
 
-
-
 include 'core/init.php';
-
-Define("LOG_FILE", 'log/logfile.log');
 
 //$pdo = new PDO('mysql:host=localhost;dbname=task6db;charset=utf8mb4', 'root', 'password');
 
-$log = new Logger(LOG_FILE);
-$log->startLog();
+$Log = new Logger(LOG_FILE);
+$Log->startLog();
 
-$PeopleArr = Person::loadAllPeople();
+//$PeopleArr = Person::loadAllPeople();
+$PageCount = Person::pageCount();
+$PeopleArr = Person::loadPeoplePage();
 
 ob_start();
 include 'templates/index.html';
@@ -46,7 +44,7 @@ include 'tabledata.php';
 
 echo $HtmlPage;
 
-$log->endLog();
-$log->saveLog();
+$Log->endLog();
+$Log->saveLog();
 
 ?>

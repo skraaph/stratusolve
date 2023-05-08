@@ -5,30 +5,37 @@ include 'core/init.php';
 $PersonDataArr = array();
 
 function randValue($DataName) {
-    $characters = 'abcdefghijklmnopqrstuvwxyz';
-    $randValue = '';
+    $CharStr = 'abcdefghijklmnopqrstuvwxyz';
+    $RandValue = '';
     switch($DataName) {
         case 'FirstName':
         case 'SurName':
             for ($i = 0; $i < 10; $i++) {
-                $randValue .= $characters[rand(0, strlen($characters)-1)];
+                $RandValue .= $CharStr[rand(0, strlen($CharStr)-1)];
             }
-            $randValue = ucfirst($randValue);
+            $RandValue = ucfirst($RandValue);
             break;
         case 'EmailAddress':
             for ($i = 0; $i < 10; $i++) {
-                $randValue .= $characters[rand(0, strlen($characters)-1)];
+                $RandValue .= $CharStr[rand(0, strlen($CharStr)-1)];
             }
-            $randValue .= '@mail.com';
+            $RandValue .= '@mail.com';
             break;
         case 'DateOfBirth':
-            $startDate = strtotime("1900-01-01");
-            $endDate = strtotime("2022-12-31");
-            $randomTimestamp = rand($startDate, $endDate);
-            $randValue = date("Y-m-d", $randomTimestamp);
+            $StartDate = strtotime("1900-01-01");
+            $EndDate = strtotime("2022-12-31");
+            $RandomTimestamp = rand($StartDate, $EndDate);
+            $RandValue = date("Y-m-d", $RandomTimestamp);
             break;
     }
-    return $randValue;
+    return $RandValue;
+}
+
+function sanitizeInput($Input) {
+    $Input = htmlspecialchars($Input);
+    $Input = trim($Input);
+    $Input = stripslashes($Input);
+    return $Input;
 }
 
 if (isset($_POST['action'])) {
@@ -41,14 +48,17 @@ if (isset($_POST['action'])) {
         ];
     }
 } else {
+    $MaxInt = filter_input(INPUT_POST, 'max', FILTER_SANITIZE_NUMBER_INT);
     $PersonDataArr = [
-        'FirstName' => $_POST['FirstName'],
-        'SurName' => $_POST['SurName'],
-        'DateOfBirth' => $_POST['DateOfBirth'],
-        'EmailAddress' => $_POST['EmailAddress'],
+        'FirstName' => ucfirst(strtolower(sanitizeInput($_POST['FirstName']))),
+        'SurName' => ucfirst(strtolower(sanitizeInput($_POST['SurName']))),
+        'DateOfBirth' => sanitizeInput($_POST['DateOfBirth']),
+        'EmailAddress' => filter_input(INPUT_POST, 'EmailAddress', FILTER_SANITIZE_EMAIL),
     ];
 }
 
 Person::createPerson("person", $PersonDataArr);
+
+echo Person::pageCount();
 
 ?>

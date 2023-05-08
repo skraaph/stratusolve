@@ -20,23 +20,23 @@
         </div>
         <div class="modal-body">
           <form>
-            <div class="fisrtname_surname">
+            <div class="fisrtname-surname">
               <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-sm">FirstName</span>
-                <input id="FirstNameEdit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                <input id="FirstName" type="text" class="form-control text-only" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
               </div>
               <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-sm">SurName</span>
-                <input id="SurNameEdit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                <input id="SurName" type="text" class="form-control text-only" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
               </div>
             </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label">DateOfBirth:</label>
-              <input id="DateOfBirthEdit" type="date" class="form-control" id="exampleFormControlInput1" placeholder="2000-01-01">
+              <input id="DateOfBirth" type="date" class="form-control" id="exampleFormControlInput1" placeholder="2000-01-01">
             </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label">EmailAddress:</label>
-              <input id="EmailAddressEdit" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              <input id="EmailAddress" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
           </form>
         </div>
@@ -58,24 +58,24 @@
         </div>
         <div class="modal-body">
           <form>
-            <input type="hidden" name="rowId" id="rowId">
-            <div class="fisrtname_surname">
+            <input type="hidden" name="rowId" id="rowIdEdit">
+            <div class="fisrtname-surname">
               <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-sm">FirstName</span>
-                <input id="FirstName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                <input id="FirstNameEdit" type="text" class="form-control text-only" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
               </div>
               <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-sm">SurName</span>
-                <input id="SurName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                <input id="SurNameEdit" type="text" class="form-control text-only" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
               </div>
             </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label">DateOfBirth:</label>
-              <input id="DateOfBirth" type="date" class="form-control" id="exampleFormControlInput1" placeholder="2000-01-01">
+              <input id="DateOfBirthEdit" type="date" class="form-control" id="exampleFormControlInput1" placeholder="2000-01-01">
             </div>
             <div class="mb-3">
               <label for="message-text" class="col-form-label">EmailAddress:</label>
-              <input id="EmailAddress" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              <input id="EmailAddressEdit" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
           </form>
         </div>
@@ -88,12 +88,17 @@
   </div>
   <!-- End Modal -->
   <div class="App">
-    <div class="table_name"><h1>People</h1></div>
-    <div class="main">
-      { table_data }
-    </div>
+    <div class="table-name"><h1>People</h1></div>
+      <div class="main">
+        <div class="table-data">
+          { table_data }
+        </div>
+        <div class="nav-bar">
+          { navbar_data }
+        </div>
+      </div>
     <div class="aside">
-      <div class="menu_item">
+      <div class="menu-item">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalCreate">Create person</button>
         <button id="random" type="button" class="btn btn-primary">Generate data</button>
