@@ -1,49 +1,56 @@
 <?php
 
 class Person {
-    private $pdo;
+    private $conn;
     
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
     private function randValue($DataName) {
-        $characters = 'abcdefghijklmnopqrstuvwxyz';
-        $randValue = '';
+        $CharactersStr = 'abcdefghijklmnopqrstuvwxyz';
+        $RandValueStr = '';
         switch($DataName) {
             case 'FirstName':
             case 'Surname':
                 for ($i = 0; $i < 10; $i++) {
-                    $randValue .= $characters[rand(0, strlen($characters)-1)];
+                    $RandValueStr .= $CharactersStr[rand(0, strlen($CharactersStr)-1)];
                 }
-                $randValue = ucfirst($randValue);
+                $RandValueStr = ucfirst($RandValueStr);
                 break;
             case 'EmailAddress':
                 for ($i = 0; $i < 10; $i++) {
-                    $randValue .= $characters[rand(0, strlen($characters)-1)];
+                    $RandValueStr .= $CharactersStr[rand(0, strlen($CharactersStr)-1)];
                 }
-                $randValue .= '@mail.com';
+                $RandValueStr .= '@mail.com';
                 break;
             case 'DateOfBirth':
-                $startDate = strtotime("1900-01-01");
-                $endDate = strtotime("2022-12-31");
-                $randomTimestamp = rand($startDate, $endDate);
-                $randValue = date("Y-m-d", $randomTimestamp);
+                $StartDate = strtotime("1900-01-01");
+                $EndDate = strtotime("2022-12-31");
+                $RandomTimestamp = rand($StartDate, $EndDate);
+                $RandValueStr = date("Y-m-d", $RandomTimestamp);
                 break;
         }
-        return $randValue;
+        return $RandValueStr;
     }
 
     public function createPerson($personNumber) {
         for ($i=0; $i < $personNumber; $i++) {
-            $query = "INSERT INTO person (`FirstName`, `Surname`, `DateOfBirth`, `EmailAddress`) VALUES (:FirstName, :Surname, :DateOfBirth, :EmailAddress)";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->bindValue(':FirstName', $this->randValue('FirstName'), PDO::PARAM_STR);
-            $stmt->bindValue(':Surname', $this->randValue('Surname'), PDO::PARAM_STR);
-            $stmt->bindValue(':DateOfBirth', $this->randValue('DateOfBirth'), PDO::PARAM_STR);
-            $stmt->bindValue(':EmailAddress', $this->randValue('EmailAddress'), PDO::PARAM_STR);
-            $stmt->execute();
+            $query = "INSERT INTO person (`FirstName`, `Surname`, `DateOfBirth`, `EmailAddress`) VALUES (?, ?, ?, ?)";
+            $stmt = mysqli_prepare($this->conn, $query);
+
+            $FirstName = $this->randValue('FirstName');
+            $SurName = $this->randValue('Surname');
+            $DateOfBirth = $this->randValue('DateOfBirth');
+            $EmailAddress = $this->randValue('EmailAddress');
+            mysqli_stmt_bind_param($stmt, "ssss", $FirstName, $SurName, $DateOfBirth, $EmailAddress);
+            
+            if (mysqli_stmt_execute($stmt)) {
+            } else {
+                echo "Error creating record: " . mysqli_error($this->conn);
+            }
         }
+        mysqli_stmt_close($stmt);
     }
 
     public function loadPerson($id) {
@@ -60,15 +67,14 @@ class Person {
 
     public function loadAllPeople() {
         $query = "SELECT * FROM person";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt = mysqli_query($this->conn, $query);
+        return mysqli_fetch_all($stmt, MYSQLI_ASSOC);
     }
 
     public function deleteAllPeople() {
         $query = "DELETE FROM person";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
+        $stmt = mysqli_prepare($this->conn, $query);
+        mysqli_stmt_execute($stmt);
     }
 }
 

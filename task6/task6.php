@@ -1,10 +1,10 @@
 <?php 
 
 class Task6 {
-    private $pdo;
+    private $conn;
 
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
     public function printTable($TableData) {
@@ -13,12 +13,12 @@ class Task6 {
     }
 
     public function run() {
-        $person = new Person($this->pdo);
-        $person->createPerson(10);
-        $peopleArr = $person->loadAllPeople();
-        $htmlOutput = $this->printTable($peopleArr);
-        echo $htmlOutput;
-        $person->deleteAllPeople();
+        $Person = new Person($this->conn);
+        $Person->createPerson(10);
+        $PeopleArr = $Person->loadAllPeople();
+        $HtmlOutput = $this->printTable($PeopleArr);
+        echo $HtmlOutput;
+        $Person->deleteAllPeople();
     }
 }
 

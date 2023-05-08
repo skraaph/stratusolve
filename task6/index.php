@@ -23,15 +23,21 @@ Define("LOG_FILE", 'logfile.log');
 
 include __DIR__ . '/autoload.php';
 
-$pdo = new PDO('mysql:host=localhost;dbname=task6db;charset=utf8mb4', 'root', 'password');
+$ServerName = "localhost";
+$UserName = "root";
+$Password = "password";
+$DbName = "task6db";
 
-$log = new Logger(LOG_FILE);
-$log->startLog();
+// Create connection
+$conn = mysqli_connect($ServerName, $UserName, $Password, $DbName);
 
-$task6 = new Task6($pdo);
-$task6->run();
+$Log = new Logger(LOG_FILE);
+$Log->startLog();
 
-$log->endLog();
-$log->saveLog();
+$Task6 = new Task6($conn);
+$Task6->run();
+
+$Log->endLog();
+$Log->saveLog();
 
 ?>
