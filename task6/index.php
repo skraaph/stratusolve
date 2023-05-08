@@ -19,17 +19,32 @@
 
 // Add a log that logs when your script starts and ends and shows how long it took to execute
 
-Define("LOG_FILE", 'logfile.log');
+// Task 7:
+// This card builds on: Foundation Task 6
 
-include __DIR__ . '/autoload.php';
+// Create an html file that allows for a user to create, read, update and delete a Person from the database
+// This file should use jquery to post data to your backend php script to perform the required functions
 
-$pdo = new PDO('mysql:host=localhost;dbname=task6db;charset=utf8mb4', 'root', 'password');
+
+
+include 'core/init.php';
+
+Define("LOG_FILE", 'log/logfile.log');
+
+//$pdo = new PDO('mysql:host=localhost;dbname=task6db;charset=utf8mb4', 'root', 'password');
 
 $log = new Logger(LOG_FILE);
 $log->startLog();
 
-$task6 = new Task6($pdo);
-$task6->run();
+$PeopleArr = Person::loadAllPeople();
+
+ob_start();
+include 'templates/index.html';
+$HtmlPage = ob_get_clean();
+
+include 'tabledata.php';
+
+echo $HtmlPage;
 
 $log->endLog();
 $log->saveLog();
