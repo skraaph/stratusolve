@@ -102,7 +102,7 @@ $(document).ready(function () {
       },
       cache: false,
       success: function(data) {
-        window.location.href=window.location.href+data
+        window.location.href='index.php?page='+data
       },
       error: function(xhr, status, error) {
         console.error(xhr);
