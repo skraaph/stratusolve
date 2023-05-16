@@ -1,0 +1,115 @@
+.acc-change {
+    padding: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.acc-firstname,
+.acc-lastname,
+.acc-username,
+.acc-password {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.acc-firstname span,
+.acc-lastname span,
+.acc-username span,
+.acc-password span {
+    padding-right: 1rem;
+}
+
+.acc-firstname input,
+.acc-lastname input,
+.acc-username input,
+.acc-password input {
+    border: 0 solid#5b4b3b;
+    background-color: #051622;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin: 2px 0;
+    width: 100%;
+    color: #deb992;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.acc-firstname input::placeholder,
+.acc-lastname input::placeholder,
+.acc-username input::placeholder,
+.acc-password input::placeholder {
+  color: #676767;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.acc-change button {
+    width: 15rem;
+    border-radius: 20px;
+    border: 1px solid #9a795d;
+    background-color: #deb992;
+    color: #051622;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px 35px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.acc-firstname-error,
+.acc-lastname-error,
+.acc-username-error,
+.acc-password-error {
+    color: red;
+    margin-right: 10px;
+    font-size: 10px;
+    text-align: right;
+    visibility: hidden;
+}
+
+.acc-btn {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.acc-btn button {
+    white-space: nowrap;
+    flex: 1 1 0;
+}
+
+.acc-btn-done {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    visibility: hidden;
+}
+
+.acc-btn-done svg {
+    margin-left: 10px;
+    color: #1ba098;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.active {
+    visibility: visible;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; visibility: hidden; }
+    100% { opacity: 1; visibility: visible; }
+}
+  
+.active-done {
+    animation: fadeIn 0.3s;
+    animation-fill-mode: forwards;
+}
