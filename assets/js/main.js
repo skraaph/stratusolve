@@ -60,16 +60,18 @@ $(document).ready(function () {
   }
 
   $(window).on('scroll', function () {
-    var hT = $('.main-post-footer').offset().top,
-       hH = -50,
-       wH = $(window).height(),
-       wS = $(this).scrollTop();
-    if (wS > (hT + hH - wH) && !isLoading) {
-      isLoading = true;
-      setTimeout(() => {
-        console.log('load');
-        loadElements();
-      }, 100);
+    if ($('.main-post-footer').length) {
+      var hT = $('.main-post-footer').offset().top,
+        hH = -50,
+        wH = $(window).height(),
+        wS = $(this).scrollTop();
+      if (wS > (hT + hH - wH) && !isLoading) {
+        isLoading = true;
+        setTimeout(() => {
+          console.log('load');
+          loadElements();
+        }, 100);
+      }
     }
   });
 
@@ -158,32 +160,36 @@ $(document).ready(function() {
 });
 
 // new post
-$(document).ready(function() {
-  $('form.form-newpost').submit(function(e) {
+$(document).ready(function () {
+  $('form.form-newpost').submit(function (e) {
     e.preventDefault();
     var form = $(this);
 
-    var postName = $("#postname").val();
-    var postText = $("#posttext").val();
-
-    $.ajax({
-      type: form.attr('method'),
-      url: form.attr('action'),
-      data: {
-        postname: postName,
-        posttext: postText
-      },
-      success: function (data) {
-        if (data['Done']) {
-          var $receivedElement = $(data['NewPost']);
-          $(".main-list").empty();
-          loadElements();
-          //$(".main-list").prepend($receivedElement);
-        } else {
-          signErrors(data);
-        }
-      },
-    });
+    var postName = $("#postname").val().trim();
+    var postText = $("#posttext").val().trim();
+    if (postName != '' &&  postText != '') {
+      $.ajax({
+        type: form.attr('method'),
+        url: form.attr('action'),
+        data: {
+          postname: postName,
+          posttext: postText
+        },
+        success: function (data) {
+          if (data['Done']) {
+            var $receivedElement = $(data['NewPost']);
+            $("#postname").val('');
+            $("#posttext").val('');
+            $(".main-list").empty();
+            loadElements();
+            //$(".main-list").prepend($receivedElement);
+          } else {
+            signErrors(data);
+          }
+        },
+      });
+      
+    }
   });
 });
 

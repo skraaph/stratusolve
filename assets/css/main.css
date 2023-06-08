@@ -239,6 +239,7 @@ a {
 }
 
 .newpost-text textarea {
+    resize: none;
     border: 0 solid#5b4b3b;
     background-color: #051622;
     border-radius: 6px;
@@ -349,6 +350,15 @@ a {
     padding-bottom: 1rem;
     font-size: 18px;
     font-weight: 700;
+    max-width: 500px;
+}
+
+.post-name span {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .post-header-btn {
@@ -378,6 +388,14 @@ a {
     padding-right: 1rem;
     word-spacing: 0.1rem;
     text-align: justify;
+    max-width: 500px;
+}
+
+.post-text span {
+    display: inline-block;
+    max-width: 100%;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .post-footer {

@@ -9,17 +9,17 @@
     <div class="main-newpost">
         <div class="newpost-aside">
             <div class="newpost-user-img">
-                <img src="assets/default.png" alt="">
+                <img src="assets/uploads/<?= $_SESSION['user']['img']?>" alt="">
             </div>
         </div>
         <div class="newpost-main">
             <form class="form-newpost" action="handlers/handle_newpost.php" method="post">
                 <div class="newpost-header">
-                    <input type="text" name="" id="postname" placeholder="Post title" autocomplete="off" required>
+                    <input type="text" name="" id="postname" placeholder="Post title" autocomplete="off">
                 </div>
                 <div class="newpost-text">
-                    <textarea name="" id="posttext" cols="30" rows="4" placeholder="Post text" autocomplete="off"
-                        required></textarea>
+                    <textarea name="" id="posttext" cols="30" rows="4" maxlength="200" placeholder="Post text"
+                        autocomplete="off"></textarea>
                 </div>
                 <div class="newpost-footer">
                     <button>Publish</button>

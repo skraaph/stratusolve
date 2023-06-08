@@ -7,10 +7,11 @@ use Core\Classes\Validator;
 require '../core/functions.php';
 require '../config.php';
 require '../core/classes/database.php';
-require '../core/classes/Validator.php';
+require '../core/classes/validator.php';
 require '../core/classes/authenticator.php';
 
 session_start();
+header('Content-Type: application/json; charset=utf-8');
 
 $DatabaseConfigArr = require getBasePath(DB_CONF_FILE);
 $DatabaseConnection = new Database($DatabaseConfigArr['database']);
@@ -21,21 +22,26 @@ $PasswordStr = $_POST['password'];
 $ErrorsArr = array();
 
 if (!Validator::email($EmailStr)) {
-   $ErrorsArr['email'] = 'Please provide a valid email address.';
+    $ErrorsArr['signin-email'] = '* Please provide a valid email address.';
 }
-
 if (!Validator::string($PasswordStr, 7, 32)) {
-    $ErrorsArr['password'] = 'Please enter a password from 7 to 32 characters.';
+    $ErrorsArr['signin-password'] = '* Wrong password or email.';
 }
-
 if (!empty($ErrorsArr)) {
     echo json_encode($ErrorsArr);
     exit();
 } else {
+    if (!Validator::emailExist($EmailStr)) {
+        $ErrorsArr['signin-password'] = '* Wrong password or email.';
+        echo json_encode($ErrorsArr);
+        exit();
+    }
+
     $signedInBool = (new Authenticator)->attemptConnect($EmailStr, $PasswordStr);
 
     if (!$signedInBool) {
-        echo false;
+        $ErrorsArr['signin-password'] = '* Wrong password or email.';
+        echo json_encode($ErrorsArr);
     } else {
         echo true;
     }

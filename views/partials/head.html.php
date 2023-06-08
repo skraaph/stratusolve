@@ -61,7 +61,7 @@
                 </div>
                 <div class="account-item">
                     <div class="account-item-img">
-                        <img src="assets/default.png" alt="">
+                        <img src="assets/uploads/<?= $_SESSION['user']['img']?>" alt="">
                     </div>
                     <a><?php echo $_SESSION['user']['user_full']; ?></a>
                 </div>

@@ -1,10 +1,89 @@
+.acc-forms {
+    display: flex;
+    flex-flow: row nowrap;
+    padding-top: 20px;
+}
+
+.acc-img-change {
+    width: 132px;
+    background-color: #001f33;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.acc-change2 {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.acc-pass-change,
 .acc-change {
+    width: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     padding: 1rem;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    background-color: #001f33;
+    color: #1ba098;
+    font-size: 18px;
+    font-weight: 700;
 }
 
+.acc-img-inp {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.acc-change-item {
+    width: auto;
+    padding-bottom: 4px;
+}
+
+.acc-change-item input {
+    margin: 0;
+}
+
+.acc-img {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.acc-img img{
+    width: 100px;
+    height: 100px;
+    margin: 1rem;
+    margin-bottom: 0;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.acc-img button {
+    display: none;
+    width: 100px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 0px solid #9a795d;
+    background-color: #deb992;
+    color: #051622;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 4px;
+    margin: 1rem;
+    margin-top: 0;
+    padding-bottom: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.acc-old-password,
+.acc-new-password,
 .acc-firstname,
 .acc-lastname,
 .acc-username,
@@ -12,16 +91,23 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    align-content: center;
     white-space: nowrap;
 }
 
+.acc-img-error span,
+.acc-old-password span,
+.acc-new-password span,
 .acc-firstname span,
 .acc-lastname span,
 .acc-username span,
 .acc-password span {
     padding-right: 1rem;
+    width: 10rem;
 }
 
+.acc-old-password input,
+.acc-new-password input,
 .acc-firstname input,
 .acc-lastname input,
 .acc-username input,
@@ -46,7 +132,7 @@
   font-weight: 700;
 }
 
-.acc-change button {
+.acc-btn button {
     width: 15rem;
     border-radius: 20px;
     border: 1px solid #9a795d;
@@ -62,12 +148,13 @@
     text-transform: uppercase;
 }
 
+.acc-img-error,
 .acc-firstname-error,
 .acc-lastname-error,
 .acc-username-error,
 .acc-password-error {
     color: red;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     font-size: 10px;
     text-align: right;
     visibility: hidden;
@@ -112,4 +199,137 @@
 .active-done {
     animation: fadeIn 0.3s;
     animation-fill-mode: forwards;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 101;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    color: #001f33;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  
+  .modal-content {
+    border-radius: 6px;
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 1rem;
+    padding-top: 0;
+    border: 1px solid #ccc;
+    width: 450px;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .modal-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-header h1 {
+    flex: 1 1 0;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+  }
+  .modal-content span {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .close {
+    order: 1;
+    float: right;
+    font-size: 48px;
+    font-weight: 800;
+    align-self: flex-end;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+.inputfile + label, .inputfile-label {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 700;
+    color: #051622;
+    background-color: #1ba098;
+    display: inline-block;
+    margin: 0 1rem;
+    padding: 1.2rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.inputfile-label {
+    height: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.inputfile-label:hover,
+.inputfile:focus + label,
+.inputfile-label label:hover {
+    background-color: #259d41;
+    color: #fff;
+}
+
+.acc-img button:hover {
+    color: red;
+}
+
+.active-btn {
+    visibility: visible;
+}
+
+.active-btn2 {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.acc-img button,
+.inputfile + label, .inputfile-label, .inputfile-label label {
+    cursor: pointer;
+}
+
+.acc-img-error span {
+    font-size: 12px;
+    word-wrap:break-word;
+    padding: 0;
+}
+
+#acc-img-error {
+    margin: 1rem;
+}
+
+.acc-img-info {align-self: flex-end;
+    padding: 1rem;
+}
+
+.acc-img-info span {
+    font-size: 10px;
 }

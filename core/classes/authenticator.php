@@ -20,7 +20,8 @@ class Authenticator
                     'user_full' => $UserDataArr['FirstName'] . ' ' . $UserDataArr['LastName'][0] . '.',
                     'user_firstname' => $UserDataArr['FirstName'],
                     'user_lastname' => $UserDataArr['LastName'],
-                    'username' => $UserDataArr['Username']
+                    'username' => $UserDataArr['Username'],
+                    'img' => $UserDataArr['Img']
                 ]);
                 return true;
             }
@@ -36,7 +37,8 @@ class Authenticator
             'user_full' => $UserDataArr['user_full'],
             'user_firstname' => $UserDataArr['user_firstname'],
             'user_lastname' => $UserDataArr['user_lastname'],
-            'username' => $UserDataArr['username']
+            'username' => $UserDataArr['username'],
+            'img' => $UserDataArr['img']
         ];
         
         session_regenerate_id(true);

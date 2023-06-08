@@ -20,7 +20,7 @@ $.fn.capitalizeFirstChar = function() {
 $(document).ready(function() {
   $('.text-only').on('input', function() {
     $(this).val(function(_, val) {
-      return val.replace(/\d/g, '');
+      return val.replace(/[^a-zA-Z']+/g, '');
     });
     $(this).capitalizeFirstChar();
   });
@@ -29,17 +29,22 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('.char-first').on('input', function() {
     var inputValue = $(this).val().charAt(0);
-    if (/^\d/.test(inputValue)) {
+    if (/^[0-9]?[^a-zA-Z]+/.test(inputValue)) {
       $(this).val(function(_, val) {
         return val.slice(1);
       });
     }
+    $(this).val(function(_, val) {
+      return val.replace(/[^a-zA-Z0-9']+/g, '');
+    });
   });
 });
 
 $(function() {
   $('form.form-signin').submit(function(e) {
     e.preventDefault();
+    $('input').removeClass('error-active');
+    $('.msg-error').removeClass('active');
     var form = $(this);
 
     var email = $("#login-email").val();
@@ -53,12 +58,12 @@ $(function() {
         password: password
       },
       success: function (data) {
-        if (data != false) {
+        if (data == true) {
           var segments = window.location.href.split("/");
           segments.pop();
           
-          //window.location.href = segments.join("/");
-          location.reload(false)
+          window.location.href = segments.join("/");
+          //location.reload(true)
         } else {
           signErrors(data);
         }
@@ -67,9 +72,11 @@ $(function() {
   });
 });
 
-$(function() {
-  $('form.form-signup').submit(function(e) {
+$(function () {
+  $('form.form-signup').submit(function (e) {
     e.preventDefault();
+    $('input').removeClass('error-active');
+    $('.msg-error').removeClass('active');
     var form = $(this);
 
     var firstname = $("#signup-firstname").val();
@@ -90,6 +97,7 @@ $(function() {
       },
       success: function (data) {
         if (data == true) {
+          $("#myModal").css("display", "block");
           $('.signup-btn-done').addClass('active-done');
           setTimeout(() => {
             $('#signIn').trigger('click');
@@ -104,33 +112,69 @@ $(function() {
 });
 
 function signErrors(data) {
-  $.each(JSON.parse(data), function (index, item) {
+  $.each(data, function (index, item) {
     switch (index) {
       case 'firstname':
+        $('#signup-firstname').addClass('error-active');
         $('#signup-firstname-error').text(item);
         $("#signup-firstname-error").addClass("active");
         break;
       case 'lastname':
+        $('#signup-lastname').addClass('error-active');
         $('#signup-lastname-error').text(item);
         $('#signup-lastname-error').addClass("active");
         break;
       case 'email':
+        $('#signup-email').addClass('error-active');
         $('#signup-email-error').text(item);
         $('#signup-email-error').addClass("active");
         break;
       case 'username':
+        $('#signup-username').addClass('error-active');
         $('#signup-username-error').text(item);
         $('#signup-username-error').addClass("active");
         break;
       case 'password':
+        $('#signup-password').addClass('error-active');
         $('#signup-password-error').text(item);
         $('#signup-password-error').addClass("active");
+        break;
+      case 'signin-email':
+        $('#login-email').addClass('error-active');
+        $('#login-email-error').text(item);
+        $('#login-email-error').addClass("active");
+        break;
+      case 'signin-password':
+        $('#login-password').addClass('error-active');
+        $('#login-password-error').text(item);
+        $('#login-password-error').addClass("active");
+        break;
+      case 'signin-error':
+        $('#login-email').addClass('error-active');
+        $('#login-password').addClass('error-active');
+        $('#login-password-error').text(item);
+        $('#login-password-error').addClass("active");
         break;
     }
   });
 };
 
-$(document).on('keydown', '#signup-firstname, #signup-lastname, #signup-email, #signup-username, #signup-password',
+$(document).on('keydown', '#signup-firstname, #signup-lastname, #signup-email, #signup-username, #signup-password, #login-password, #login-email',
   function () {
     $(this).next('div').removeClass("active");
-});
+    $(this).removeClass('error-active');
+  });
+
+$(document).ready(function () {
+  /*$(".signup-btn button").click(function () {
+    $("#myModal").css("display", "block");
+  });*/
+  
+  $(".close, .modal").click(function () {
+    $("#myModal").css("display", "none");
+  });
+  
+  $(".modal-content").click(function (e) {
+    e.stopPropagation();
+  });
+});  

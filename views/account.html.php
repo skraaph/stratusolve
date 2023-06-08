@@ -3,51 +3,127 @@
 
 <!-- Main -->
 <div class="main">
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="close">&times;</p>
+                <h1>Done!</h1>
+            </div>
+            <span>Changes have been saved</span>
+        </div>
+    </div>
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="close">&times;</p>
+                <h1>Done!</h1>
+            </div>
+            <span> Password has been changed </span>
+        </div>
+    </div>
     <div class="main-header">
         <span>Account</span>
     </div>
-    <form action="handlers/handle_userchange.php" method="post" class="acc-change">
-        <div class="acc-firstname">
-            <span>First Name:</span>
-            <input class="text-only" type="text" id="acc-firstname" placeholder="First Name" autocomplete="off"
-                required>
-            <div class="acc-firstname-error" id="acc-firstname-error">
-                Looks good!
+    <div class="acc-forms">
+        <form class="acc-img-change" action="handlers/handle_userimage.php" method="post">
+            <div>
+                <div class="acc-img">
+                    <img id="previewImage" src="assets/uploads/<?= $_SESSION['user']['img']?>" alt="">
+                    <input type="file" name="file" id="file" class="inputfile" />
+                    <div class="inputfile-label">
+                        <label for="file">Choose <br> a file</label>
+                    </div>
+                    <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
+                    <button>change image</button>
+                </div>
+                <div class="acc-img-error" id="acc-img-error">
+                    <span>Looks good!</span>
+                </div>
             </div>
-        </div>
-        <div class="acc-lastname">
-            <span>Last Name:</span>
-            <input class="text-only" type="text" id="acc-lastname" placeholder="Last Name" autocomplete="off" required>
-            <div class="acc-lastname-error" id="acc-lastname-error">
-                Looks good!
+            <div class="acc-img-info">
+                <span>* Only png files up to 100Kb are allowed</span>
             </div>
+        </form>
+        <div style="width: 4px;"></div>
+        <div class="acc-change2">
+            <form action="handlers/handle_userchange.php" method="post" class="acc-change">
+                <div class="acc-img-inp">
+                    <div class="acc-data">
+                        <div class="acc-firstname">
+                            <span>First Name:</span>
+                            <div class="acc-change-item">
+                                <input class="text-only required" type="text" id="acc-firstname"
+                                    value="<?=$ViewUserFirstNameStr ?>" placeholder="First Name" autocomplete="off">
+                                <div class="acc-firstname-error" id="acc-firstname-error">
+                                    <span>Looks good!</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-lastname">
+                            <span>Last Name:</span>
+                            <div class="acc-change-item">
+                                <input class="text-only required" type="text" id="acc-lastname"
+                                    value="<?=$ViewUserLastNameStr ?>" placeholder="Last Name" autocomplete="off">
+                                <div class="acc-lastname-error" id="acc-lastname-error">
+                                    <span>Looks good!</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-username">
+                            <span>Username:</span>
+                            <div class="acc-change-item">
+                                <input class="char-first required" type="text" id="acc-username"
+                                    value="<?=$ViewUsernameStr ?>" placeholder="Username" autocomplete="off">
+                                <div class="acc-username-error" id="acc-username-error">
+                                    <span>Looks good!</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-password">
+                            <span>Password:</span>
+                            <div class="acc-change-item">
+                                <input class="required" type="password" id="acc-password" placeholder="Password"
+                                    autocomplete="off">
+                                <div class="acc-password-error" id="acc-password-error">
+                                    <span>Looks good!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-btn">
+                    <div></div>
+                    <button>Confirm changes</button>
+                </div>
+            </form>
+            <div style="height: 4px;"></div>
+            <form class="acc-pass-change" action="handlers/handle_userpass.php" method="post">
+                <div class="acc-old-password">
+                    <span>Old password:</span>
+                    <div class="acc-change-item">
+                        <input class="required" type="password" id="acc-oldpassword-ch" placeholder="Password"
+                            autocomplete="off">
+                        <div class="acc-password-error" id="acc-oldpassword-error">
+                            <span>Looks good!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-new-password">
+                    <span>New password:</span>
+                    <div class="acc-change-item">
+                        <input class="required" type="password" id="acc-newpassword-ch" placeholder="Password"
+                            autocomplete="off">
+                        <div class="acc-password-error" id="acc-newpassword-error">
+                            <span>Looks good!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-btn">
+                    <button>Update password</button>
+                </div>
+            </form>
         </div>
-        <div class="acc-username">
-            <span>Username:</span>
-            <input class="char-first" type="text" id="acc-username" placeholder="Username" autocomplete="off" required>
-            <div class="acc-username-error" id="acc-username-error">
-                Looks good!
-            </div>
-        </div>
-        <div class="acc-password">
-            <span>Password:</span>
-            <input type="password" id="acc-password" placeholder="Password" autocomplete="off" required>
-            <div class="acc-password-error" id="acc-password-error">
-                Looks good!
-            </div>
-        </div>
-        <div class="acc-btn">
-            <div></div>
-            <button>Confirm changes</button>
-            <div class="acc-btn-done">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                </svg>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>
 
 <?php require('partials/footer.html.php') ?>

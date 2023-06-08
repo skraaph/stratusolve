@@ -42,7 +42,7 @@ if (!empty($ErrorsArr)) {
     $PostDataResultArr = $PostData->Statement->get_result();
     while ($PostObjArr = $PostDataResultArr->fetch_assoc()) {
         //SELECT `FirstName`, `LastName`, `Username`FROM `users` WHERE Id=?;
-        $UserObjArr = $DatabaseConnection->query('SELECT `Id`, `FirstName`, `LastName`, `Username` FROM Users WHERE Id=?', [
+        $UserObjArr = $DatabaseConnection->query('SELECT `Id`, `FirstName`, `LastName`, `Username`, `Img` FROM Users WHERE Id=?', [
             'Id' => $PostObjArr['UserId']
         ])->find();
 
@@ -50,6 +50,7 @@ if (!empty($ErrorsArr)) {
         } else {
             $UserFullNameStr = $UserObjArr['FirstName'] . ' ' . $UserObjArr['LastName'][0] . '.';
             $UsernameStr = '@' . $UserObjArr['Username'];
+            $UserImgStr = $UserObjArr['Img'];
             $PostDate = $PostObjArr['PostTimeStamp'];
             $PostNameStr = $PostObjArr['PostName'];
             if($_SESSION['user']['user_id'] == $UserObjArr['Id']) {
@@ -60,7 +61,13 @@ if (!empty($ErrorsArr)) {
             $PostTextStr = $PostObjArr['PostText'];
 
             ob_start();
-            include '../views/partials/post.html.php';
+
+            view("partials/post.html.php", [
+                'ViewUserIdStr' => $_SESSION['user']['user_id'],
+                'ViewPostUserIdStr' => $PostObjArr['UserId']
+            ]);
+
+            //include '../views/partials/post.html.php';
             $PostHtmlElement = ob_get_clean();
 
             $PostHtmlElement = str_replace('{ Userfull }', $UserFullNameStr, $PostHtmlElement);
@@ -69,6 +76,7 @@ if (!empty($ErrorsArr)) {
             $PostHtmlElement = str_replace('{ Postname }', $PostNameStr, $PostHtmlElement);
             $PostHtmlElement = str_replace('{ Postid }', $PostIdStr, $PostHtmlElement);
             $PostHtmlElement = str_replace('{ Posttext }', $PostTextStr, $PostHtmlElement);
+            $PostHtmlElement = str_replace('{ UserImg }', $UserImgStr, $PostHtmlElement);
             
             $ResultsStr .= $PostHtmlElement;
             //$StartPostId = $PostObjArr['Id'];

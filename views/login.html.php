@@ -11,50 +11,52 @@
 </head>
 
 <body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="close">&times;</p>
+                <h1>Welcome!</h1>
+            </div>
+            <span>Congratulations! You've successfully signed up for BLOG.</span>
+            <span>Now, just log in using the credentials you provided during registration.</span>
+        </div>
+    </div>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form class="form-signup" action="handlers/handle_registration.php" method="post">
                 <h1 class="form-header">Create Account</h1>
                 <div class="signup-item">
-                    <input class="text-only" type="text" id="signup-firstname" placeholder="First Name" required>
-                    <div class="signup-firstname-error" id="signup-firstname-error">
+                    <input class="text-only required" type="text" id="signup-firstname" placeholder="First Name">
+                    <div class="msg-error" id="signup-firstname-error">
                         Looks good!
                     </div>
                 </div>
                 <div class="signup-item">
-                    <input class="text-only" type="text" id="signup-lastname" placeholder="Last Name" required>
-                    <div class="signup-lastname-error" id="signup-lastname-error">
+                    <input class="text-only required" type="text" id="signup-lastname" placeholder="Last Name">
+                    <div class="msg-error" id="signup-lastname-error">
                         Looks good!
                     </div>
                 </div>
                 <div class="signup-item">
-                    <input type="email" id="signup-email" placeholder="Email" required>
-                    <div class="signup-email-error" id="signup-email-error">
+                    <input class="required" type="text" id="signup-email" placeholder="Email">
+                    <div class="msg-error" id="signup-email-error">
                         Looks good!
                     </div>
                 </div>
                 <div class="signup-item">
-                    <input class="char-first" type="text" id="signup-username" placeholder="Username" required>
-                    <div class="signup-username-error" id="signup-username-error">
+                    <input class="char-first required" type="text" id="signup-username" placeholder="Username">
+                    <div class="msg-error" id="signup-username-error">
                         Looks good!
                     </div>
                 </div>
                 <div class="signup-item">
-                    <input type="password" id="signup-password" placeholder="Password" required>
-                    <div class="signup-password-error" id="signup-password-error">
+                    <input class="required" type="password" id="signup-password" placeholder="Password">
+                    <div class="msg-error" id="signup-password-error">
                         Looks good!
                     </div>
                 </div>
                 <div class="signup-btn">
-                    <div></div>
                     <button>Sign Up</button>
-                    <div class="signup-btn-done">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                        </svg>
-                    </div>
                 </div>
             </form>
         </div>
@@ -62,14 +64,14 @@
             <form class="form-signin" action="handlers/handle_authentication.php" method="post">
                 <h1 class="form-header">Sign in</h1>
                 <div class="login-item">
-                    <input type="email" id="login-email" placeholder="Email" required>
-                    <div class="login-email-error">
+                    <input class="required" type="text" id="login-email" placeholder="Email">
+                    <div class="msg-error" id="login-email-error">
                         Looks good!
                     </div>
                 </div>
                 <div class="login-item">
-                    <input type="password" id="login-password" placeholder="Password" required>
-                    <div class="login-password-error">
+                    <input class="required" type="password" id="login-password" placeholder="Password">
+                    <div class="msg-error" id="login-password-error">
                         Looks good!
                     </div>
                 </div>
